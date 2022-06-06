@@ -30,6 +30,7 @@ public class CompanyManager {
     @Column(name = "BuyList")
     private Long BuyList;
 
-    @OneToOne(mappedBy = "CompanyManager")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Manager_id", referencedColumnName = "Manager")
     private Company company;
 }

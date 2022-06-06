@@ -27,4 +27,8 @@ public class Order {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Sum", referencedColumnName = "Sum_id")
     private Sum sums;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Order_id", referencedColumnName = "Order")
+    private Orders orders;
 }

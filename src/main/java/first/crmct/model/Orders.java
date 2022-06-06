@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Orders", schema = "schema_first")
@@ -16,9 +17,6 @@ public class Orders {
     @SequenceGenerator(name = "Orders_id_seq", schema = "schema_first", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Company")
-    private Long company;
-
     @Column(name = "Order")
     private Long order;
 
@@ -26,9 +24,8 @@ public class Orders {
     private Long manager;
 
     @OneToOne(mappedBy = "Orders")
-    private Company companys;
+    private Company company;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Company", referencedColumnName = "Company_id")
-    private Company comp;
+    @OneToMany(mappedBy = "Orders")
+    private List<Order> orderList;
 }

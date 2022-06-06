@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Company", schema = "schema_first")
@@ -22,14 +23,10 @@ public class Company {
     @Column(name = "BuyList")
     private Long buyList;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Manager", referencedColumnName = "Manager_id")
-    private CompanyManager companyManager;
+    @OneToMany(mappedBy = "Company")
+    private List<CompanyManager> companyManagerlist;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BuyList", referencedColumnName = "Orders_id")
     private Orders orders;
-
-    @OneToOne(mappedBy = "Company")
-    private Orders ord;
 }
