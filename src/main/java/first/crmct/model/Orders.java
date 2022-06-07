@@ -25,10 +25,10 @@ public class Orders {
     @SequenceGenerator(name = "Orders_id_seq", schema = "schema_first", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Order")
+    @Column(name = "Order_id")
     private Long order;
 
-    @Column(name = "Manager")
+    @Column(name = "Manager_id")
     private Long manager;
 
     @OneToOne(mappedBy = "Orders")

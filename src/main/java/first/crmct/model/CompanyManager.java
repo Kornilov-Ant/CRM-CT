@@ -34,11 +34,11 @@ public class CompanyManager {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "BuyList")
+    @Column(name = "Orders_id")
     private Long BuyList;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Manager_id", referencedColumnName = "Manager")
+    @JoinColumn(name = "Id", referencedColumnName = "Manager_id")
     private Company company;
 
 }

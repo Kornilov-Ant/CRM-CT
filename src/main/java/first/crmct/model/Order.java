@@ -24,7 +24,7 @@ public class Order {
     @SequenceGenerator(name = "Order_id_seq", schema = "schema_first", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Sum")
+    @Column(name = "Sum_id")
     private Long sum;
 
     @Column(name = "Text")
@@ -34,11 +34,11 @@ public class Order {
     private Long status;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Sum", referencedColumnName = "Sum_id")
+    @JoinColumn(name = "Sum_id", referencedColumnName = "Id")
     private Sum sums;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Order_id", referencedColumnName = "Order")
+    @JoinColumn(name = "Id", referencedColumnName = "Order_id")
     private Orders orders;
 
 }

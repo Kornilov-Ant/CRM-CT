@@ -25,17 +25,17 @@ public class Company {
     @SequenceGenerator(name = "Company_id_seq", schema = "schema_first", allocationSize = 1)
     private Long id;
 
-    @Column(name = "Manager")
+    @Column(name = "Manager_id")
     private Long manager;
 
-    @Column(name = "BuyList")
+    @Column(name = "Orders_id")
     private Long buyList;
 
     @OneToMany(mappedBy = "Company")
     private List<CompanyManager> companyManagerlist;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "BuyList", referencedColumnName = "Orders_id")
+    @JoinColumn(name = "Orders_id", referencedColumnName = "Id")
     private Orders orders;
 
 }
