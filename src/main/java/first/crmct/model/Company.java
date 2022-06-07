@@ -29,4 +29,5 @@ public class Company {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "BuyList", referencedColumnName = "Orders_id")
     private Orders orders;
+
 }

@@ -26,5 +26,4 @@ public class Sum {
 
     @OneToOne(mappedBy = "Sum")
     private Order order;
-
 }

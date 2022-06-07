@@ -31,4 +31,5 @@ public class Order {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Order_id", referencedColumnName = "Order")
     private Orders orders;
+
 }
