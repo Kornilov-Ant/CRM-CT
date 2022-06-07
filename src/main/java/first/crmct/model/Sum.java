@@ -5,6 +5,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/*
+Сущность суммы заказа.
+
+Consumption - расход
+Income - доход
+Sum - сумма заказа
+ */
+
 @Entity
 @Table(name = "Sum", schema = "schema_first")
 @Getter @Setter
@@ -21,7 +29,7 @@ public class Sum {
     @Column(name = "Consumption")
     private Long consumption;
 
-    @Column(name = "income")
+    @Column(name = "Income")
     private Long income;
 
     @OneToOne(mappedBy = "Sum")

@@ -6,6 +6,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+/*
+Сущность компания.
+
+Manager - менеджер с котором контакт в компании (может быть несколько у компании)
+BuyList - список заказов компании
+
+ */
+
 @Entity
 @Table(name = "Company", schema = "schema_first")
 @Getter

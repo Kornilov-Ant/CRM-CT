@@ -6,6 +6,14 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
+/*
+Сущность Заказы.
+
+Order - ссылается на конкретные заказы от этого id
+Manager - ссылается на менеджеров, которые идут к заказам этой компании
+
+ */
+
 @Entity
 @Table(name = "Orders", schema = "schema_first")
 @Getter

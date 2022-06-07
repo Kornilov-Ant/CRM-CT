@@ -5,6 +5,15 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/*
+Сущность заказ.
+
+Sum - сумма заказа
+Text - описание заказа
+Status - статус заказа
+
+ */
+
 @Entity
 @Table(name = "Order", schema = "schema_first")
 @Getter @Setter
