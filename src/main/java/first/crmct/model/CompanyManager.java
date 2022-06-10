@@ -31,7 +31,7 @@ public class CompanyManager {
     @Column(name = "Contact_number")
     private Long contactNumber;
 
-    @Column(name = "email")
+    @Column(name = "Email")
     private String email;
 
     @Column(name = "Orders_id")
