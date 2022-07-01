@@ -11,7 +11,10 @@ public class CompanyDTO {
     private String companyName;
 
     @NotBlank
-    private String managerName;
+    private String managerFirstName;
+
+    private String managerLastName;
+    private String email;
 
     @NotBlank
     private String contactNumberManager;

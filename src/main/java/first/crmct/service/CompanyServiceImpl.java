@@ -2,8 +2,11 @@ package first.crmct.service;
 
 import first.crmct.model.Company;
 import first.crmct.model.CompanyManager;
+import first.crmct.model.Orders;
 import first.crmct.model.dto.CompanyDTO;
+import first.crmct.repository.CompanyManagerRepository;
 import first.crmct.repository.CompanyRepository;
+import first.crmct.repository.OrdersRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import java.util.Optional;
 public class CompanyServiceImpl implements CompanyService{
 
     private final CompanyRepository companyRepository;
+    private final CompanyManagerRepository managerRepository;
+    private final OrdersRepository ordersRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -26,10 +31,16 @@ public class CompanyServiceImpl implements CompanyService{
     public Long save(CompanyDTO companyDTO) {
         Company company = new Company();
         CompanyManager manager = new CompanyManager();
+        Orders orders = new Orders();
         company.setName(companyDTO.getCompanyName());
-        manager.setFirstName(companyDTO.getManagerName());
+        manager.setFirstName(companyDTO.getManagerFirstName());
+        manager.setLastName(companyDTO.getManagerLastName());
         manager.setContactNumber(companyDTO.getContactNumberManager());
-
+        manager.setEmail(companyDTO.getEmail());
+        manager = managerRepository.save(manager);
+        company.setManager(manager.getId());
+        orders = ordersRepository.save(orders);
+//        company.setOrders(orders.getId());
         company = companyRepository.save(company);
         return company.getId();
     }
