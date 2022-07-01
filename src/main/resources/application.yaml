@@ -1,6 +1,10 @@
-  spring:
-    datasource:
-      url: jdbc:postgresql://localhost:5432/CT_crm
-      driver-class-name: org.postgresql.Driver
-      username: postgres
-      password: 666666
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/CT_crm
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: 666666
+
+#  jpa:
+#    hibernate:
+#      ddl-auto: create 

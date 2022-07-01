@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static first.crmct.model.DbConstants.DB_SCHEMA;
+
 /*
 Сущность менеджер компании.
 
@@ -13,13 +15,13 @@ BuyList - список заказов к конкретному менеджер
  */
 
 @Entity
-@Table(name = "CompanyManager", schema = "schema_first")
+@Table(name = "CompanyManager", schema = DB_SCHEMA)
 @Getter @Setter
 public class CompanyManager {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CompanyManager_id_seq")
-    @SequenceGenerator(name = "CompanyManager_id_seq", schema = "schema_first", allocationSize = 1)
+    @SequenceGenerator(name = "CompanyManager_id_seq", schema = DB_SCHEMA, allocationSize = 1)
     private Long id;
 
     @Column(name = "First_name")
@@ -29,7 +31,7 @@ public class CompanyManager {
     private String lastName;
 
     @Column(name = "Contact_number")
-    private Long contactNumber;
+    private String contactNumber;
 
     @Column(name = "Email")
     private String email;
@@ -38,7 +40,7 @@ public class CompanyManager {
     private Long BuyList;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id", referencedColumnName = "Manager_id")
+    @JoinColumn(name = "Company_id")
     private Company company;
 
 }

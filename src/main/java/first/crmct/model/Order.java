@@ -5,6 +5,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+import static first.crmct.model.DbConstants.DB_SCHEMA;
+
 /*
 Сущность заказ.
 
@@ -15,17 +17,14 @@ Status - статус заказа
  */
 
 @Entity
-@Table(name = "Order", schema = "schema_first")
+@Table(name = "Order", schema = DB_SCHEMA)
 @Getter @Setter
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Order_id_seq")
-    @SequenceGenerator(name = "Order_id_seq", schema = "schema_first", allocationSize = 1)
+    @SequenceGenerator(name = "Order_id_seq", schema = DB_SCHEMA, allocationSize = 1)
     private Long id;
-
-    @Column(name = "Sum_id")
-    private Long sum;
 
     @Column(name = "Text")
     private String text;
@@ -33,12 +32,11 @@ public class Order {
     @Column(name = "Status")
     private Long status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Sum_id", referencedColumnName = "Id")
-    private Sum sums;
+    @Column(name = "Sum")
+    private Long sum;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Id", referencedColumnName = "Order_id")
+    @JoinColumn(name = "Orders_Id")
     private Orders orders;
 
 }
