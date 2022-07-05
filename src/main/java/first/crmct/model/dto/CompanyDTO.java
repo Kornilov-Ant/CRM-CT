@@ -7,6 +7,8 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class CompanyDTO {
 
+    private Long id;
+
     @NotBlank
     private String companyName;
 

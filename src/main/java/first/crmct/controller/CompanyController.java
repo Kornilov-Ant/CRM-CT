@@ -1,7 +1,7 @@
 package first.crmct.controller;
 
 
-import first.crmct.exc.ContactNotFoundException;
+import first.crmct.exc.CompanyNotFoundException;
 import first.crmct.model.dto.CompanyDTO;
 import first.crmct.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/company")
@@ -23,20 +24,14 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+        List<CompanyDTO> companyDTOList = companyService.findAll();
+        model.addAttribute("companyDTOList", companyDTOList);
         return "company";
     }
 
     @GetMapping("/newCompany")
     public String newCompany(CompanyDTO companyDTO) {
-        return "edit-company";
-    }
-
-    @GetMapping("/{id}")
-    public String editCompany(@PathVariable("id") Long id, Model model) {
-        CompanyDTO dto = companyService.findById(id).orElseThrow(ContactNotFoundException::new);
-        model.addAttribute("companyDTO", dto);
-
         return "edit-company";
     }
 
@@ -49,9 +44,18 @@ public class CompanyController {
         return "redirect:/company/" + id;
     }
 
-    @PostMapping
-    public String updateCompany() {
-        return "";
+    @GetMapping("/{id}")
+    public String editCompany(@PathVariable("id") Long id, Model model) {
+        CompanyDTO dto = companyService.findById(id).orElseThrow(() -> new CompanyNotFoundException(id));
+        model.addAttribute("companyDTO", dto);
+
+        return "edit-company";
+    }
+
+    @PostMapping("/{id}")
+    public String updateCompany(@PathVariable("id") Long id, CompanyDTO dto) {
+        companyService.update(id, dto);
+        return "edit-company";
     }
 
 }
