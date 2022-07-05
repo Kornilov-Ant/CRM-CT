@@ -1,10 +1,11 @@
 package first.crmct.controller;
 
 
-import first.crmct.exc.ContactNotFoundException;
+import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.CompanyDTO;
 import first.crmct.service.CompanyService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
+@Log4j2
 @Controller
 @RequestMapping("/company")
 @RequiredArgsConstructor
@@ -23,20 +26,14 @@ public class CompanyController {
     private final CompanyService companyService;
 
     @GetMapping
-    public String index() {
+    public String index(Model model) {
+        List<CompanyDTO> companyDTOList = companyService.findAll();
+        model.addAttribute("companyDTOList", companyDTOList);
         return "company";
     }
 
     @GetMapping("/newCompany")
     public String newCompany(CompanyDTO companyDTO) {
-        return "edit-company";
-    }
-
-    @GetMapping("/{id}")
-    public String editCompany(@PathVariable("id") Long id, Model model) {
-        CompanyDTO dto = companyService.findById(id).orElseThrow(ContactNotFoundException::new);
-        model.addAttribute("companyDTO", dto);
-
         return "edit-company";
     }
 
@@ -49,9 +46,17 @@ public class CompanyController {
         return "redirect:/company/" + id;
     }
 
-    @PostMapping
-    public String updateCompany() {
-        return "";
+    @GetMapping("/{id}")
+    public String editCompany(@PathVariable("id") Long id, Model model) {
+        CompanyDTO dto = companyService.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+        model.addAttribute("companyDTO", dto);
+        return "edit-company";
+    }
+
+    @PostMapping("/{id}")
+    public String updateCompany(@PathVariable("id") Long id, CompanyDTO dto) {
+        companyService.update(id, dto);
+        return "redirect:/company/" + id;
     }
 
 }

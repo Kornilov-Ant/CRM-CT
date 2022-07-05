@@ -15,13 +15,13 @@ BuyList - список заказов к конкретному менеджер
  */
 
 @Entity
-@Table(name = "CompanyManager", schema = DB_SCHEMA)
+@Table(name = "Manager", schema = DB_SCHEMA)
 @Getter @Setter
-public class CompanyManager {
+public class Manager {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CompanyManager_id_seq")
-    @SequenceGenerator(name = "CompanyManager_id_seq", schema = DB_SCHEMA, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Manager_id_seq")
+    @SequenceGenerator(name = "Manager_id_seq", schema = DB_SCHEMA, allocationSize = 1)
     private Long id;
 
     @Column(name = "First_name")
@@ -37,10 +37,14 @@ public class CompanyManager {
     private String email;
 
     @Column(name = "Orders_id")
-    private Long BuyList;
+    private Long orders;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Company_id")
     private Company company;
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

@@ -5,8 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CompanyManagerDTO {
+public class ManagerDTO {
 
+    private Long id;
     @NotBlank
     private String firstName;
 
@@ -15,5 +16,11 @@ public class CompanyManagerDTO {
 
     @NotBlank
     private String contactNumber;
+
+    private Long orders;
+
+    private Long companyId;
+
+    private String company;
 
 }

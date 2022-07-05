@@ -34,10 +34,10 @@ public class Company {
     private Long manager;
 
     @OneToMany(mappedBy = "company")
-    private List<CompanyManager> companyManagerlist;
+    private List<Manager> managerlist;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Orders_id")
-    private Orders orders;
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

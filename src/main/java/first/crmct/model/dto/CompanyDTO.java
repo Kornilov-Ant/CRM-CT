@@ -1,11 +1,15 @@
 package first.crmct.model.dto;
 
+import first.crmct.model.Manager;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 public class CompanyDTO {
+
+    private Long id;
 
     @NotBlank
     private String companyName;
@@ -18,5 +22,8 @@ public class CompanyDTO {
 
     @NotBlank
     private String contactNumberManager;
+
+    //
+    private List<Manager> managerlist;
 
 }

@@ -27,15 +27,9 @@ public class Orders {
     @SequenceGenerator(name = "Orders_id_seq", schema = DB_SCHEMA, allocationSize = 1)
     private Long id;
 
-//    @Column(name = "Order_id")
-//    private Long order;
-
     @ManyToOne
     @JoinColumn(name = "Manager_id")
-    private CompanyManager manager;
-
-    @OneToOne(mappedBy = "orders")
-    private Company company;
+    private Manager manager;
 
     @OneToMany(mappedBy = "orders")
     private List<Order> orderList;
