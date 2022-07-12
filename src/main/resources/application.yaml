@@ -6,5 +6,8 @@ spring:
     password: 666666
 
 #  jpa:
+#    show-sql: true
+
+#  jpa:
 #    hibernate:
 #      ddl-auto: create 

@@ -18,7 +18,7 @@ public class OrderDTO {
     private Long companyId;
 
     @NotBlank
-    private Long status;
+    private StatusOrderDTO status;
 
     @NotBlank
     private String text;

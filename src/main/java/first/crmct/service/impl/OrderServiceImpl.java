@@ -1,15 +1,8 @@
 package first.crmct.service.impl;
 
-import first.crmct.model.Company;
-import first.crmct.model.Manager;
-import first.crmct.model.Order;
-import first.crmct.model.Orders;
-import first.crmct.model.dto.ManagerDTO;
+import first.crmct.model.*;
 import first.crmct.model.dto.OrderDTO;
-import first.crmct.repository.CompanyRepository;
-import first.crmct.repository.ManagerRepository;
-import first.crmct.repository.OrderRepository;
-import first.crmct.repository.OrdersRepository;
+import first.crmct.repository.*;
 import first.crmct.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -28,6 +21,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrdersRepository ordersRepository;
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
+    private final StatusOrderRepository statusOrderRepository;
 
     @Override
     public Optional<OrderDTO> findById(Long id) {
@@ -37,10 +31,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Long save(OrderDTO orderDTO) {
         Order order = new Order();
-        Manager manager = managerRepository.findById(orderDTO.getManagerId()).orElseThrow();
+        Manager manager = managerRepository.findById(orderDTO.getManagerId()).orElseThrow(); // Добавить выбор из списка!!!!
         Orders orders = ordersRepository.findById(manager.getOrders()).orElseThrow();
 
-        order.setStatus(1L); // Добавить выбор статуса из списка!!!!
+        order.setStatusOrder(statusOrderRepository.findById(1L).orElseThrow()); // Добавить выбор из списка!!!!
 
         order.setSum(orderDTO.getSum());
         order.setText(orderDTO.getText());
@@ -62,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
     public void update(Long id, OrderDTO dto) {
         Order order = orderRepository.findById(id).orElseThrow();
         order.setText(dto.getText());
-        order.setStatus(dto.getStatus());
+        order.setStatusOrder(statusOrderRepository.findById(dto.getStatus().getId()).orElseThrow());
         order.setSum(dto.getSum());
         orderRepository.save(order);
     }
@@ -73,6 +67,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private OrderDTO map(Order order) {
+
         return modelMapper.map(order, OrderDTO.class);
     }
 

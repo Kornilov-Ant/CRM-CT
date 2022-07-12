@@ -45,21 +45,22 @@
                 </div>
             </div>
 
-            <h3>Новая компания</h3>
-                <div class="container">
-                    <form method="post" th:object="${companyDTO}">
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-                        <div class="row mb-3">
-                            <label for="inputCompanyName" class="col-sm-2 col-form-label">Название компании</label>
-                            <div class="col-sm-4">
-                                <input type="text" class="form-control" id="inputCompanyName" th:field="*{companyName}">
-                                <span th:if="${#fields.hasErrors('companyName')}"
-                                      th:errors="*{companyName}">Not valid</span>
-                            </div>
+            <h3>Поиск по id</h3>
+            <div class="container">
+                <form method="post" th:object="${searchIdDTO}">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <div class="row mb-3">
+                        <label for="idCompany" class="col-sm-2 col-form-label">Введите id компании</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="idCompany" th:field="*{idCompany}">
+                            <span th:if="${#fields.hasErrors('idCompany')}"
+                                  th:errors="*{idCompany}">Not valid</span>
                         </div>
-                        <button type="submit" class="btn btn-primary">Сохранить</button>
-                    </form>
-                </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Перейти к редактированию</button>
+                </form>
+            </div>
         </main>
     </div>
 </div>

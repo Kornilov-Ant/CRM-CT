@@ -42,7 +42,10 @@
                 <h1 class="h2">Компании</h1>
                 <div sec:authorize="${hasAuthority('Admin')}">
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a th:href="@{company/newCompany}" type="button" class="btn btn-sm btn-primary">Создать</a>
+                        <a href="/company/newCompany" type="button" class="btn btn-sm btn-primary">Создать новую компанию</a>
+                    </div>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="/company/edit" type="button" class="btn btn-sm btn-primary">Редактировать компанию</a>
                     </div>
                 </div>
             </div>
@@ -63,14 +66,14 @@
                         <th scope="col">Телефон менеджера</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="company : ${companyDTOList}">
-                        <td th:text="${company.id}"></td>
-                        <td th:text="${company.companyName}"></td>
-                        <td th:text="${company.managerFirstName}"></td>
-                        <td th:text="${company.managerLastName}"></td>
-                        <td th:text="${company.contactNumberManager}"></td>
-                    </tr>
+                    <tbody id="tableBody">
+<!--                    <tr th:each="company : ${companyDTOList}">-->
+<!--                        <td th:text="${company.id}"></td>-->
+<!--                        <td th:text="${company.companyName}"></td>-->
+<!--                        <td th:text="${company.managerFirstName}"></td>-->
+<!--                        <td th:text="${company.managerLastName}"></td>-->
+<!--                        <td th:text="${company.contactNumberManager}"></td>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>

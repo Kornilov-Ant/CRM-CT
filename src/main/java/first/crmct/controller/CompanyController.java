@@ -3,6 +3,7 @@ package first.crmct.controller;
 
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.CompanyDTO;
+import first.crmct.model.dto.SearchIdDTO;
 import first.crmct.service.CompanyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -34,15 +35,29 @@ public class CompanyController {
 
     @GetMapping("/newCompany")
     public String newCompany(CompanyDTO companyDTO) {
-        return "edit-company";
+        return "new-company";
     }
 
     @PostMapping("/newCompany")
     public String createCompany(@Valid CompanyDTO companyDTO, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "edit-company";
+            return "new-company";
         }
         Long id = companyService.save(companyDTO);
+        return "redirect:/company/" + id;
+    }
+
+    @GetMapping("/edit")
+    public String editionId(SearchIdDTO searchIdDTO) {
+        return "idCompany";
+    }
+
+    @PostMapping("/edit")
+    public String updateId(@Valid SearchIdDTO searchIdDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "idCompany";
+        }
+        Long id = searchIdDTO.getIdCompany();
         return "redirect:/company/" + id;
     }
 
@@ -56,7 +71,7 @@ public class CompanyController {
     @PostMapping("/{id}")
     public String updateCompany(@PathVariable("id") Long id, CompanyDTO dto) {
         companyService.update(id, dto);
-        return "redirect:/company/" + id;
+        return "redirect:/company/";
     }
 
 }

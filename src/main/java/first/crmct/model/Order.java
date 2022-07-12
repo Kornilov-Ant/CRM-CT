@@ -29,8 +29,8 @@ public class Order {
     @Column(name = "Text")
     private String text;
 
-    @Column(name = "Status")
-    private Long status;
+//    @Column(name = "Status", insertable = false, updatable = false)
+//    private Long status;
 
     @Column(name = "Sum")
     private Long sum;
@@ -38,5 +38,9 @@ public class Order {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Orders_Id")
     private Orders orders;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status")
+    private StatusOrder statusOrder;
 
 }

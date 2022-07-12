@@ -3,6 +3,7 @@ package first.crmct.controller;
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.OrderDTO;
 import first.crmct.service.OrderService;
+import first.crmct.service.StatusOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import java.util.List;
 public class OrdersController {
 
     private final OrderService orderService;
+    private final StatusOrderService statusOrderService;
 
     @GetMapping
     public String index(Model model) {
@@ -30,7 +32,8 @@ public class OrdersController {
     }
 
     @GetMapping("/newOrder")
-    public String newOrder(OrderDTO orderDTO) {
+    public String newOrder(OrderDTO orderDTO, Model model) {
+        model.addAttribute("stat", statusOrderService.findAll());
         return "edit-order";
     }
 

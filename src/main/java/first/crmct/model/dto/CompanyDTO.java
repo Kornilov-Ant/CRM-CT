@@ -24,6 +24,6 @@ public class CompanyDTO {
     private String contactNumberManager;
 
     //
-    private List<Manager> managerlist;
+    private List<ManagerDTO> managerlist;
 
 }

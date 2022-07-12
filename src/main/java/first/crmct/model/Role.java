@@ -17,6 +17,7 @@ public class Role {
     @SequenceGenerator(name = "roles_id_seq", schema = DB_SCHEMA, allocationSize = 1)
     private Long id;
 
+    @Column(name = "name")
     private String name;
 
 

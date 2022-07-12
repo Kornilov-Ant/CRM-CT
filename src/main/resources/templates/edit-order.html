@@ -69,15 +69,30 @@
                                   th:errors="*{sum}">Not valid</span>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <label for="status" class="col-sm-2 col-form-label">Статус заказа</label>
+<!--                    <div class="row mb-3">-->
+<!--                        <label for="status" class="col-sm-2 col-form-label">Статус заказа</label>-->
+<!--                        <div class="col-sm-4">-->
+<!--                            <input type="text" class="form-control" id="status"-->
+<!--                                   th:field="*{status}">-->
+<!--                            <span th:if="${#fields.hasErrors('status')}"-->
+<!--                                  th:errors="*{status}">Not valid</span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">Статус заказа</legend>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="status"
-                                   th:field="*{status}">
-                            <span th:if="${#fields.hasErrors('status')}"
-                                  th:errors="*{status}">Not valid</span>
+                            <select th:field="*{managerId}" class="form-select mb-3" aria-label=".form-select-lg example">
+                                <option th:value="-1">--> выбрать статус <--</option>
+                                ></option>
+                                <option th:each="status : ${stat}"
+                                        th:value="${status.id}"
+                                        th:text="${status.name}"
+                                ></option>
+                            </select>
                         </div>
-                    </div>
+                    </fieldset>
+
                     <div class="row mb-3">
                         <label for="managerId" class="col-sm-2 col-form-label">Менеджер заказа</label>
                         <div class="col-sm-4">
@@ -87,6 +102,7 @@
                                   th:errors="*{managerId}">Not valid</span>
                         </div>
                     </div>
+
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>
