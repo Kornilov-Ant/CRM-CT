@@ -42,7 +42,9 @@
                 <h1 class="h2">Менеджеры</h1>
                 <div sec:authorize="${hasAuthority('Admin')}">
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a th:href="@{manager/newManager}" type="button" class="btn btn-sm btn-primary">Создать</a>
+                        <a href="/manager/newManager" type="button" class="btn btn-sm btn-primary">Создать нового
+                            менеджера</a>
+                        <a href="/manager/edit" type="button" class="btn btn-sm btn-primary">Редактировать менеджера</a>
                     </div>
                 </div>
             </div>
@@ -61,22 +63,21 @@
                         <th scope="col">Фамилия менеджера</th>
                         <th scope="col">Телефон менеджера</th>
                         <th scope="col">Email</th>
-                        <th scope="col">id заказов</th>
                         <th scope="col">Название компании</th>
 
                         <!--                        <th scope="col">id заказов</th>-->
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr th:each="manager : ${list}">
-                        <td th:text="${manager.id}"></td>
-                        <td th:text="${manager.firstName}"></td>
-                        <td th:text="${manager.lastName}"></td>
-                        <td th:text="${manager.contactNumber}"></td>
-                        <td th:text="${manager.email}"></td>
-                        <td th:text="${manager.orders}"></td>
-                        <td th:text="${manager.company}"></td>
-                    </tr>
+                    <tbody id="tableBody">
+                    <!--                    <tr th:each="manager : ${list}">-->
+                    <!--                        <td th:text="${manager.id}"></td>-->
+                    <!--                        <td th:text="${manager.firstName}"></td>-->
+                    <!--                        <td th:text="${manager.lastName}"></td>-->
+                    <!--                        <td th:text="${manager.contactNumber}"></td>-->
+                    <!--                        <td th:text="${manager.email}"></td>-->
+                    <!--                        <td th:text="${manager.orders}"></td>-->
+                    <!--                        <td th:text="${manager.company}"></td>-->
+                    <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -105,7 +106,6 @@
                     $.lastName + '</td><td>' +
                     $.contactNumber + '</td><td>' +
                     $.email + '</td><td>' +
-                    $.orders + '</td><td>' +
                     $.company +
                     '</td></tr>');
                 $('#tableBody').html(content);

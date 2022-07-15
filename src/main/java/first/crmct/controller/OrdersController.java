@@ -2,6 +2,8 @@ package first.crmct.controller;
 
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.OrderDTO;
+import first.crmct.model.dto.SearchIdDTO;
+import first.crmct.service.ManagerService;
 import first.crmct.service.OrderService;
 import first.crmct.service.StatusOrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class OrdersController {
 
     private final OrderService orderService;
     private final StatusOrderService statusOrderService;
+    private final ManagerService managerService;
 
     @GetMapping
     public String index(Model model) {
@@ -34,6 +37,7 @@ public class OrdersController {
     @GetMapping("/newOrder")
     public String newOrder(OrderDTO orderDTO, Model model) {
         model.addAttribute("stat", statusOrderService.findAll());
+        model.addAttribute("man", managerService.findAll());
         return "edit-order";
     }
 
@@ -46,9 +50,25 @@ public class OrdersController {
         return "redirect:/orders";
     }
 
+    @GetMapping("/edit")
+    public String editionId(SearchIdDTO searchIdDTO) {
+        return "idOrders";
+    }
+
+    @PostMapping("/edit")
+    public String updateId(@Valid SearchIdDTO searchIdDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "idOrders";
+        }
+        Long id = searchIdDTO.getId();
+        return "redirect:/orders/" + id;
+    }
+
     @GetMapping("/{id}")
     public String editOrder(@PathVariable("id") Long id, Model model) {
         OrderDTO orderDTO = orderService.findById(id).orElseThrow(() -> new ObjectNotFoundException(id));
+        model.addAttribute("stat", statusOrderService.findAll());
+        model.addAttribute("man", managerService.findAll());
         model.addAttribute(orderDTO);
         return "edit-order";
     }

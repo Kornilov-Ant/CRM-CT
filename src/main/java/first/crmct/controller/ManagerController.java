@@ -2,6 +2,8 @@ package first.crmct.controller;
 
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.ManagerDTO;
+import first.crmct.model.dto.SearchIdDTO;
+import first.crmct.service.CompanyService;
 import first.crmct.service.ManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.util.List;
 public class ManagerController {
 
     private final ManagerService managerService;
+    private final CompanyService companyService;
 
     @GetMapping
     public String index(Model model) {
@@ -30,16 +33,31 @@ public class ManagerController {
     }
 
     @GetMapping("/newManager")
-    public String newManager(ManagerDTO managerDTO) {
-        return "edit-manager";
+    public String newManager(ManagerDTO managerDTO, Model model) {
+        model.addAttribute("company", companyService.findAll());
+        return "new-manager";
     }
 
     @PostMapping("/newManager")
     public String createManager(@Valid ManagerDTO dto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()){
-            return "edit-manager";
+            return "new-manager";
         }
         Long id = managerService.save(dto);
+        return "redirect:/manager/";
+    }
+
+    @GetMapping("/edit")
+    public String editionId(SearchIdDTO searchIdDTO) {
+        return "idManager";
+    }
+
+    @PostMapping("/edit")
+    public String updateId(@Valid SearchIdDTO searchIdDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "idManager";
+        }
+        Long id = searchIdDTO.getId();
         return "redirect:/manager/" + id;
     }
 

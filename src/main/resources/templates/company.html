@@ -42,9 +42,8 @@
                 <h1 class="h2">Компании</h1>
                 <div sec:authorize="${hasAuthority('Admin')}">
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a href="/company/newCompany" type="button" class="btn btn-sm btn-primary">Создать новую компанию</a>
-                    </div>
-                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="/company/newCompany" type="button" class="btn btn-sm btn-primary">Создать новую
+                            компанию</a>
                         <a href="/company/edit" type="button" class="btn btn-sm btn-primary">Редактировать компанию</a>
                     </div>
                 </div>
@@ -61,19 +60,17 @@
                     <tr>
                         <th scope="col">id компании</th>
                         <th scope="col">Название компании</th>
-                        <th scope="col">Имя менеджера</th>
-                        <th scope="col">Фамилия менеджера</th>
-                        <th scope="col">Телефон менеджера</th>
+                        <th scope="col">Менеджеры</th>
                     </tr>
                     </thead>
                     <tbody id="tableBody">
-<!--                    <tr th:each="company : ${companyDTOList}">-->
-<!--                        <td th:text="${company.id}"></td>-->
-<!--                        <td th:text="${company.companyName}"></td>-->
-<!--                        <td th:text="${company.managerFirstName}"></td>-->
-<!--                        <td th:text="${company.managerLastName}"></td>-->
-<!--                        <td th:text="${company.contactNumberManager}"></td>-->
-<!--                    </tr>-->
+                    <!--                    <tr th:each="company : ${companyDTOList}">-->
+                    <!--                        <td th:text="${company.id}"></td>-->
+                    <!--                        <td th:text="${company.companyName}"></td>-->
+                    <!--                        <td th:text="${company.managerFirstName}"></td>-->
+                    <!--                        <td th:text="${company.managerLastName}"></td>-->
+                    <!--                        <td th:text="${company.contactNumberManager}"></td>-->
+                    <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -99,9 +96,7 @@
                 const content = data.map($ => '<tr><td>' +
                     $.id + '</td><td>' +
                     $.companyName + '</td><td>' +
-                    $.managerFirstName + '</td><td>' +
-                    $.managerLastName + '</td><td>' +
-                    $.contactNumberManager +
+                    $.managerFullName + '</td><td>' +
                     '</td></tr>');
                 $('#tableBody').html(content);
             }

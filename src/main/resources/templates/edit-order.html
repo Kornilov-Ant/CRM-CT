@@ -40,8 +40,11 @@
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Заказ</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <a th:href="@{orders/newOrder}" type="button" class="btn btn-sm btn-primary">Создать новый заказ</a>
+                <div sec:authorize="${hasAuthority('Admin')}">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a th:href="@{orders/newOrder}" type="button" class="btn btn-sm btn-primary">Создать новый
+                            заказ</a>
+                    </div>
                 </div>
             </div>
 
@@ -69,22 +72,14 @@
                                   th:errors="*{sum}">Not valid</span>
                         </div>
                     </div>
-<!--                    <div class="row mb-3">-->
-<!--                        <label for="status" class="col-sm-2 col-form-label">Статус заказа</label>-->
-<!--                        <div class="col-sm-4">-->
-<!--                            <input type="text" class="form-control" id="status"-->
-<!--                                   th:field="*{status}">-->
-<!--                            <span th:if="${#fields.hasErrors('status')}"-->
-<!--                                  th:errors="*{status}">Not valid</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
 
                     <fieldset class="row mb-3">
                         <legend class="col-form-label col-sm-2 pt-0">Статус заказа</legend>
                         <div class="col-sm-4">
-                            <select th:field="*{managerId}" class="form-select mb-3" aria-label=".form-select-lg example">
+                            <select th:field="*{statusId}" class="form-select mb-3"
+                                    aria-label=".form-select-lg example">
                                 <option th:value="-1">--> выбрать статус <--</option>
-                                ></option>
+                                </option>
                                 <option th:each="status : ${stat}"
                                         th:value="${status.id}"
                                         th:text="${status.name}"
@@ -93,15 +88,30 @@
                         </div>
                     </fieldset>
 
-                    <div class="row mb-3">
-                        <label for="managerId" class="col-sm-2 col-form-label">Менеджер заказа</label>
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">Менеджер заказа</legend>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="managerId"
-                                   th:field="*{managerId}">
-                            <span th:if="${#fields.hasErrors('managerId')}"
-                                  th:errors="*{managerId}">Not valid</span>
+                            <select th:field="*{managerId}" class="form-select mb-3"
+                                    aria-label=".form-select-lg example">
+                                <option th:value="-1">--> выбрать статус <--</option>
+                                </option>
+                                <option th:each="manager : ${man}"
+                                        th:value="${manager.id}"
+                                        th:text="${manager.toString()}"
+                                ></option>
+                            </select>
                         </div>
-                    </div>
+                    </fieldset>
+
+                    <!--                    <div class="row mb-3">-->
+                    <!--                        <label for="managerId" class="col-sm-2 col-form-label">Менеджер заказа</label>-->
+                    <!--                        <div class="col-sm-4">-->
+                    <!--                            <input type="text" class="form-control" id="managerId"-->
+                    <!--                                   th:field="*{managerId}">-->
+                    <!--                            <span th:if="${#fields.hasErrors('managerId')}"-->
+                    <!--                                  th:errors="*{managerId}">Not valid</span>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
 
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>

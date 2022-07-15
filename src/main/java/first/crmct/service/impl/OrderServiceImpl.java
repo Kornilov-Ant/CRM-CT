@@ -16,7 +16,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final CompanyRepository companyRepository;
     private final ManagerRepository managerRepository;
     private final OrdersRepository ordersRepository;
     private final OrderRepository orderRepository;
@@ -33,8 +32,10 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         Manager manager = managerRepository.findById(orderDTO.getManagerId()).orElseThrow(); // Добавить выбор из списка!!!!
         Orders orders = ordersRepository.findById(manager.getOrders()).orElseThrow();
+        order.setOrders(orders);
 
-        order.setStatusOrder(statusOrderRepository.findById(1L).orElseThrow()); // Добавить выбор из списка!!!!
+        StatusOrder statusOrder = statusOrderRepository.findById(orderDTO.getStatusId()).get();
+        order.setStatusOrder(statusOrder);
 
         order.setSum(orderDTO.getSum());
         order.setText(orderDTO.getText());
@@ -55,9 +56,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void update(Long id, OrderDTO dto) {
         Order order = orderRepository.findById(id).orElseThrow();
-        order.setText(dto.getText());
-        order.setStatusOrder(statusOrderRepository.findById(dto.getStatus().getId()).orElseThrow());
         order.setSum(dto.getSum());
+        order.setText(dto.getText());
+        order.setStatusOrder(statusOrderRepository.findById(dto.getStatusId()).get());
+        order.setOrders(ordersRepository.findById(dto.getManagerId()).get());
         orderRepository.save(order);
     }
 
@@ -67,14 +69,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private OrderDTO map(Order order) {
-
-        return modelMapper.map(order, OrderDTO.class);
+        OrderDTO orderDTO = modelMapper.map(order, OrderDTO.class);
+        orderDTO.setManagerId(order.getOrders().getManager().getId());
+        return orderDTO;
     }
 
     private OrderDTO addText(OrderDTO dto) {
-        Order order = orderRepository.findById(dto.getOrderId()).orElseThrow();
-        Orders orders = order.getOrders();
-        Manager manager = orders.getManager();
+        Order order = orderRepository.findById(dto.getId()).orElseThrow();
+        Manager manager = order.getOrders().getManager();
         Company company = manager.getCompany();
         dto.setCompany(company.toString());
         dto.setManager(manager.toString());

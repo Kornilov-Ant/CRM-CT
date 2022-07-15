@@ -40,12 +40,15 @@
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Компании</h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <a href="/company/newCompany" type="button" class="btn btn-sm btn-primary">Создать</a>
+                <div sec:authorize="${hasAuthority('Admin')}">
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <a href="/company/newCompany" type="button" class="btn btn-sm btn-primary">Создать новую
+                            компанию</a>
+                    </div>
                 </div>
             </div>
 
-            <h3>Новая компания</h3>
+            <h3>Редактирование компании</h3>
                 <div class="container">
                     <form method="post" th:object="${companyDTO}">
                         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">

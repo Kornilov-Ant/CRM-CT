@@ -40,12 +40,6 @@
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Менеджеры</h1>
-                <div sec:authorize="${hasAuthority('Admin')}">
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <a href="/manager/newManager" type="button" class="btn btn-sm btn-primary">Создать нового
-                            менеджера</a>
-                    </div>
-                </div>
             </div>
 
             <h3>Новый менеджер</h3>
@@ -81,12 +75,22 @@
                     <div class="row mb-3">
                         <label for="email" class="col-sm-2 col-form-label">Контактный email</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="email"
-                                   th:field="*{email}">
-                            <span th:if="${#fields.hasErrors('email')}"
-                                  th:errors="*{email}">Not valid</span>
+                            <input type="text" class="form-control" id="email" th:field="*{email}">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Not valid</span>
                         </div>
                     </div>
+                    <fieldset class="row mb-3">
+                        <legend class="col-form-label col-sm-2 pt-0">Компания</legend>
+                        <div class="col-sm-4">
+                            <select th:field="*{companyId}" class="form-select mb-3" aria-label=".form-select-lg example">
+                                <option th:value="-1">--> выбрать компанию <--</option>
+                                <option th:each="com : ${company}"
+                                        th:value="${com.id}"
+                                        th:text="${com.toString}"
+                                ></option>
+                            </select>
+                        </div>
+                    </fieldset>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>

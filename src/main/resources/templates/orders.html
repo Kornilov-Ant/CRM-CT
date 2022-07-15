@@ -42,7 +42,8 @@
                 <h1 class="h2">Список заказов</h1>
                 <div sec:authorize="${hasAuthority('Admin')}">
                     <div class="btn-toolbar mb-2 mb-md-0">
-                        <a th:href="@{orders/newOrder}" type="button" class="btn btn-sm btn-primary">Создать новый заказ</a>
+                        <a href="/orders/newOrder" type="button" class="btn btn-sm btn-primary">Создать новый заказ</a>
+                        <a href="/orders/edit" type="button" class="btn btn-sm btn-primary">Редактировать заказ</a>
                     </div>
                 </div>
             </div>
@@ -62,13 +63,12 @@
                         <th scope="col">Статус</th>
                         <th scope="col">Менеджер</th>
                         <th scope="col">Компания</th>
-
-                        <!--                        <th scope="col">id заказов</th>-->
                     </tr>
                     </thead>
                     <tbody>
+                    <tbody id="tableBody">
                     <tr th:each="order : ${list}">
-                        <td th:text="${order.orderId}"></tdth:text>
+                        <td th:text="${order.id}"></td>
                         <td th:text="${order.text}"></td>
                         <td th:text="${order.sum}"></td>
                         <td th:text="${order.status}"></td>
@@ -89,4 +89,28 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 </body>
+<script>
+    $(document).ready(
+        function () {
+            $('#filter').on('input', function (e) {
+                $.get('/data/orders?q=' + e.target.value, updateTable)
+            })
+
+            function updateTable(data) {
+                const content = data.map($ => '<tr><td>' +
+                    $.id + '</td><td>' +
+                    $.text + '</td><td>' +
+                    $.sum + '</td><td>' +
+                    $.status + '</td><td>' +
+                    $.manager + '</td><td>' +
+                    $.company +
+                    '</td></tr>');
+                $('#tableBody').html(content);
+            }
+            $.get('/data/orders', updateTable)
+
+            updateTable(data);
+        }
+    )
+</script>
 </html>

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class OrderDTO {
 
-    private Long orderId;
+    private Long id;
 
     private String manager;
 
@@ -17,13 +17,12 @@ public class OrderDTO {
 
     private Long companyId;
 
-    @NotBlank
     private StatusOrderDTO status;
 
-    @NotBlank
+    private Long statusId;
+
     private String text;
 
-    @NotBlank
     private Long sum;
 
 }

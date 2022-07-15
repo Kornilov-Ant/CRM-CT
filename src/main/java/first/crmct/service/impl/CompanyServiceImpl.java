@@ -75,7 +75,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public List<CompanyDTO> findByQuery(String query) {
-        return companyRepository.findByQuery(query).stream().map(entity -> map(entity)).collect(Collectors.toList());
+        return companyRepository.findByQuery(query).stream().map(entity -> map(entity)).map(dto -> addText(dto)).collect(Collectors.toList());
     }
 
     private CompanyDTO map(Company company) {
@@ -84,10 +84,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     private CompanyDTO addText(CompanyDTO dto) {
         Company company = companyRepository.findById(dto.getId()).orElseThrow();
-        Manager manager = managerRepository.findById(company.getManager()).orElseThrow();
-        dto.setManagerFirstName(manager.getFirstName());
-        dto.setManagerLastName(manager.getLastName());
-        dto.setContactNumberManager(manager.getContactNumber());
+        List<Manager> list = company.getManagerlist();
+        String name = "";
+        for (Manager manager : list) {
+            name += manager.getFirstName() + " " + manager.getLastName() + "," + "\n";
+        }
+        name = name.substring(0,name.length()-2);
+        dto.setManagerFullName(name);
         return dto;
     }
 

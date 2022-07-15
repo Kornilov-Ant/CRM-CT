@@ -3,6 +3,7 @@ package first.crmct.controller;
 
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.CompanyDTO;
+import first.crmct.model.dto.ManagerDTO;
 import first.crmct.model.dto.SearchIdDTO;
 import first.crmct.service.CompanyService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Controller
@@ -30,6 +32,8 @@ public class CompanyController {
     public String index(Model model) {
         List<CompanyDTO> companyDTOList = companyService.findAll();
         model.addAttribute("companyDTOList", companyDTOList);
+        List<List<ManagerDTO>> list = companyDTOList.stream().map(com -> com.getManagerlist()).collect(Collectors.toList());
+        model.addAttribute("man", list);
         return "company";
     }
 
@@ -44,7 +48,7 @@ public class CompanyController {
             return "new-company";
         }
         Long id = companyService.save(companyDTO);
-        return "redirect:/company/" + id;
+        return "redirect:/company/";
     }
 
     @GetMapping("/edit")
@@ -57,7 +61,7 @@ public class CompanyController {
         if (bindingResult.hasErrors()) {
             return "idCompany";
         }
-        Long id = searchIdDTO.getIdCompany();
+        Long id = searchIdDTO.getId();
         return "redirect:/company/" + id;
     }
 

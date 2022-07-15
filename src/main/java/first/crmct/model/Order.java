@@ -29,8 +29,8 @@ public class Order {
     @Column(name = "Text")
     private String text;
 
-//    @Column(name = "Status", insertable = false, updatable = false)
-//    private Long status;
+    @Column(name = "Status", insertable = false, updatable = false)
+    private Long status;
 
     @Column(name = "Sum")
     private Long sum;

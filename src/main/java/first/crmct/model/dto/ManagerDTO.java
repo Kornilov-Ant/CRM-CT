@@ -23,4 +23,10 @@ public class ManagerDTO {
 
     private String company;
 
+    private CompanyDTO companyDTO;
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

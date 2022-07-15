@@ -17,6 +17,8 @@ public class CompanyDTO {
     @NotBlank
     private String managerFirstName;
 
+    private String managerFullName;
+
     private String managerLastName;
     private String email;
 
@@ -26,4 +28,8 @@ public class CompanyDTO {
     //
     private List<ManagerDTO> managerlist;
 
+    @Override
+    public String toString() {
+        return companyName;
+    }
 }
