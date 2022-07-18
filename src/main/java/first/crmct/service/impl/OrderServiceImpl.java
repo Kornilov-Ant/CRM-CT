@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -65,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDTO> findByQuery(String query) {
-        return null;
+        return ordersRepository.findByQuery(query).stream().map(entity -> map(entity)).map(or -> addText(or)).collect(Collectors.toList());
     }
 
     private OrderDTO map(Order order) {

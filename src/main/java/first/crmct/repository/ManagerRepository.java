@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ManagerRepository extends CrudRepository<Manager, Long> {
 
-    @Query("select c from Manager c where c.lastName like %:q% or c.firstName like %:q%")
+    @Query("SELECT c FROM Manager c WHERE c.lastName LIKE %:q% OR c.firstName LIKE %:q%")
     List<Manager> findByQuery(@Param("q") String query);
 
 }
