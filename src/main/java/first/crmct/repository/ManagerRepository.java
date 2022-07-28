@@ -1,5 +1,12 @@
 package first.crmct.repository;
 
+/*
+
+Репозиторий с SQL запросом в базу, который строится на основе полученной строки из главноименной ....ServiceIml
+Запрашивается ИМЯ, ФАМИЛИЯ (lastName, firstName)
+
+ */
+
 import first.crmct.model.Manager;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

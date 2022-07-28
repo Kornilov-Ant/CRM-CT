@@ -1,8 +1,12 @@
 package first.crmct.model.dto;
 
-import lombok.Data;
+/*
 
-import javax.validation.constraints.NotBlank;
+
+
+ */
+
+import lombok.Data;
 
 @Data
 public class OrderDTO {

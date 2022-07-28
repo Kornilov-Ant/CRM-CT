@@ -19,7 +19,7 @@
             }
         }
     </style>
-    <link href="/dashboard.css" rel="stylesheet">
+    <link href="/js/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
@@ -39,10 +39,89 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Заказы в работе</h1>
+                <h3 class="h2">Актуальные заказы</h3>
+            </div>
         </main>
     </div>
+    <div id="kanban" style="margin-left: 250px"></div>
 </div>
 <div th:insert="fragments/footer :: footer"/>
 </body>
+
+<title id='Description'>Канбан</title>
+<link rel="stylesheet" href="/js/css/jqx.base.css" type="text/css"/>
+<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/js/jqxcore.js"></script>
+<script type="text/javascript" src="/js/jqxsortable.js"></script>
+<script type="text/javascript" src="/js/jqxkanban.js"></script>
+<script type="text/javascript" src="/js/jqxdata.js"></script>
+<script type="text/javascript">
+
+    build();
+    async function build() {
+        var localData = [];
+        await $.get('/kanban/rest/', {q: ''}).done(function (data) {
+            $(data).map(function (idx, obj) {
+                localData.push(
+                    {
+                        id: obj.id,
+                        status: obj.statusId,
+                        text: obj.text,
+                        tags:
+                            obj.sum + " р." + ", " +
+                            obj.manager + ", " +
+                            obj.company
+                    }
+                );
+            });
+        });
+
+        $(document).ready(function () {
+            var Data = new $.jqx.dataAdapter({
+
+                localData: localData,
+
+                dataFields: [
+                    {name: "id", type: "string"},
+                    {name: "status", type: "string"},
+                    {name: "text", type: "string"},
+                    {name: "tags", type: "string"}
+                ]
+            });
+            var Data_Function = function () {
+                var Data_Adapter = new $.jqx.dataAdapter({
+                    localData: [
+                        {name: ""},
+                    ],
+                });
+                return Data_Adapter;
+            }
+
+            $('#kanban').jqxKanban({
+                resources: Data_Function(),
+                source: Data,
+                columns: [
+                    {text: "Новый", dataField: "1"},
+                    {text: "В обработке", dataField: "3"},
+                    {text: "В работе", dataField: "5"},
+                    {text: "На упаковке", dataField: "7"},
+                    {text: "Готов", dataField: "9"}
+                    /*
+                    1 - New
+                    3 - In processing
+                    5 - In work
+                    7 - Package
+                    9 - Ready
+                     */
+                ]
+            });
+            $('#kanban').on('itemMoved', function (event) {
+                var args = event.args;
+                var id = args.itemId;
+                var newStatus = args.newColumn.dataField;
+                $.get('/kanban/rest/status?z=' + id + "@" + newStatus)
+            });
+        });
+    };
+</script>
 </html>

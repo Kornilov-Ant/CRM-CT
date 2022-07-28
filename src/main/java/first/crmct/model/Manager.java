@@ -8,9 +8,8 @@ import javax.persistence.*;
 import static first.crmct.model.DbConstants.DB_SCHEMA;
 
 /*
-Сущность менеджер компании.
 
-BuyList - список заказов к конкретному менеджер
+Сущность менеджер компании.
 
  */
 

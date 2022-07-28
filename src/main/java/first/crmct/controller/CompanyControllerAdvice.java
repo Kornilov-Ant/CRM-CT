@@ -1,5 +1,12 @@
 package first.crmct.controller;
 
+/*
+
+Контроллер для получения id объекта, который не удалось найти.
+Работает с компаниями, менеджерами и заказами
+
+ */
+
 import first.crmct.exc.ObjectNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

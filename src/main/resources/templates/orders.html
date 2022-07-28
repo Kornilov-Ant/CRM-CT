@@ -19,7 +19,7 @@
             }
         }
     </style>
-    <link href="/dashboard.css" rel="stylesheet">
+    <link href="/js/css/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
@@ -67,14 +67,6 @@
                     </thead>
                     <tbody>
                     <tbody id="tableBody">
-                    <tr th:each="order : ${list}">
-                        <td th:text="${order.id}"></td>
-                        <td th:text="${order.text}"></td>
-                        <td th:text="${order.sum}"></td>
-                        <td th:text="${order.status}"></td>
-                        <td th:text="${order.manager}"></td>
-                        <td th:text="${order.company}"></td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -101,7 +93,7 @@
                     $.id + '</td><td>' +
                     $.text + '</td><td>' +
                     $.sum + '</td><td>' +
-                    $.status + '</td><td>' +
+                    $.status.name + '</td><td>' +
                     $.manager + '</td><td>' +
                     $.company +
                     '</td></tr>');

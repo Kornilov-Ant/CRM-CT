@@ -1,5 +1,11 @@
 package first.crmct.controller;
 
+/*
+
+Контроллер для страницы Заказов
+
+ */
+
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.OrderDTO;
 import first.crmct.model.dto.SearchIdDTO;

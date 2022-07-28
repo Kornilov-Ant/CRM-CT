@@ -1,5 +1,12 @@
 package first.crmct.controller;
 
+/*
+
+Запрос-контролллер для страницы Компании.
+Передает в web лист с компаниями по запросу в фильтре.
+
+ */
+
 import first.crmct.model.dto.CompanyDTO;
 import first.crmct.service.CompanyService;
 import lombok.RequiredArgsConstructor;

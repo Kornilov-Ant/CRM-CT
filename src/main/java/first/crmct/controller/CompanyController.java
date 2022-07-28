@@ -1,5 +1,10 @@
 package first.crmct.controller;
 
+/*
+
+Контроллер для страницы Компаний.
+
+ */
 
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.CompanyDTO;

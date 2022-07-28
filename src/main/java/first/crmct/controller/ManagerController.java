@@ -1,5 +1,11 @@
 package first.crmct.controller;
 
+/*
+
+Контроллер для страницы Менеджеров.
+
+ */
+
 import first.crmct.exc.ObjectNotFoundException;
 import first.crmct.model.dto.ManagerDTO;
 import first.crmct.model.dto.SearchIdDTO;

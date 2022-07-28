@@ -1,5 +1,13 @@
 package first.crmct.controller;
 
+/*
+
+Запрос-контролллер для страницы Заказы.
+Передает в web лист с заказами по запросу в фильтре.
+Используется и в запросах с главной странице для вывода
+
+ */
+
 import first.crmct.model.dto.OrderDTO;
 import first.crmct.service.OrderService;
 import lombok.RequiredArgsConstructor;

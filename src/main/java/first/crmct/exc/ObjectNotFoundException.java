@@ -1,5 +1,11 @@
 package first.crmct.exc;
 
+/*
+
+Объект ошибки с запрашиваемым id объекта
+
+ */
+
 import lombok.Value;
 
 @Value

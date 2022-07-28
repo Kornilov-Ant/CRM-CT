@@ -1,5 +1,12 @@
 package first.crmct.controller;
 
+/*
+
+Запрос-контролллер для страницы Менеджеров.
+Передает в web лист с менеджерами по запросу в фильтре.
+
+ */
+
 import first.crmct.model.dto.ManagerDTO;
 import first.crmct.service.ManagerService;
 import lombok.RequiredArgsConstructor;
