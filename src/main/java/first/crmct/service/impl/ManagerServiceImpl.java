@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ManagerServiceImpl implements ManagerService {
 
-    private final CompanyRepository companyRepository;
     private final ManagerRepository managerRepository;
     private final OrdersRepository ordersRepository;
     private final ModelMapper modelMapper;

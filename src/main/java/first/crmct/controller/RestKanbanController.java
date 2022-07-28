@@ -28,7 +28,7 @@ public class RestKanbanController {
     public void statusNew(@RequestParam(value = "z", required = false) String query) {
         System.out.println(query);
         Long id = Long.valueOf(query.substring(0, query.indexOf("@")));
-        Long statusId = Long.valueOf(query.substring(query.indexOf("@")+1, query.length()));
+        Long statusId = Long.valueOf(query.substring(query.indexOf("@") + 1, query.length()));
         OrderDTO dto = service.findById(id).orElseThrow();
         dto.setStatusId(statusId);
         service.update(id, dto);
@@ -36,15 +36,11 @@ public class RestKanbanController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<OrderDTO> index(@RequestParam(value = "q", required = false) String query) {
-        if (query == null || query == "") {
-            List<OrderDTO> list =
-                    service.findAll().
-                            stream().
-                            filter(orderDTO -> orderDTO.getStatusId()!=9l).
-                            collect(Collectors.toList());
-
-            return list;
-        }
-        return service.findByQuery(query);
+        List<OrderDTO> list =
+                service.findAll().
+                        stream().
+                        filter(orderDTO -> orderDTO.getStatusId() != 9l).
+                        collect(Collectors.toList());
+        return list;
     }
 }
