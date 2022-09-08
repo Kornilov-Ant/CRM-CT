@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/data/manager")
 @RequiredArgsConstructor
-public class RespManagerController {
+public class RestManagerController {
 
     private final ManagerService service;
 

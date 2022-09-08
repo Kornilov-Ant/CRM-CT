@@ -39,6 +39,7 @@ public class CompanyController {
         model.addAttribute("companyDTOList", companyDTOList);
         List<List<ManagerDTO>> list = companyDTOList.stream().map(com -> com.getManagerlist()).collect(Collectors.toList());
         model.addAttribute("man", list);
+        log.info("В классе: " + this.getClass() + " вывод данных из базы " + list);
         return "company";
     }
 
@@ -52,7 +53,7 @@ public class CompanyController {
         if (bindingResult.hasErrors()) {
             return "new-company";
         }
-        Long id = companyService.save(companyDTO);
+        companyService.save(companyDTO);
         return "redirect:/company/";
     }
 

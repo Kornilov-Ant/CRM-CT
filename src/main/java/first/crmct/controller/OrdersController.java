@@ -52,7 +52,7 @@ public class OrdersController {
         if(bindingResult.hasErrors()){
             return "edit-order";
         }
-        Long id = orderService.save(dto);
+        orderService.save(dto);
         return "redirect:/orders";
     }
 

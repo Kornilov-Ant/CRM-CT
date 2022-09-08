@@ -19,7 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/data/orders")
 @RequiredArgsConstructor
-public class RespOrdersController {
+public class RestOrdersController {
 
     private final OrderService service;
 

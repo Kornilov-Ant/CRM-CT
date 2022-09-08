@@ -12,6 +12,7 @@ import first.crmct.model.dto.SearchIdDTO;
 import first.crmct.service.CompanyService;
 import first.crmct.service.ManagerService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.util.List;
 
+@Log4j2
 @Controller
 @RequestMapping("/manager")
 @RequiredArgsConstructor
@@ -49,7 +51,7 @@ public class ManagerController {
         if (bindingResult.hasErrors()){
             return "new-manager";
         }
-        Long id = managerService.save(dto);
+        managerService.save(dto);
         return "redirect:/manager/";
     }
 
